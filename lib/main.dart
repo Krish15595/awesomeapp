@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: "Awesome App",
+    theme: ThemeData(
+        primarySwatch: Colors.purple //it automatically adjust primary accent
+        ),
     home: HomePage(),
   ));
 }
@@ -11,50 +14,56 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Awesome App"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              // width: MediaQuery.of(context).size.width,  //screen width will be assign
-              // height: MediaQuery.of(context).size.height/2,
-              width: 200,
-              height: 400,
-              color: Colors.black,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(        //row and column 2 function there
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      width: 100,
-                      height: 100,
-                      color: Colors.green,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      width: 100,
-                      height: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      width: 100,
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                  ],
-                ),
-              ),
+      appBar: AppBar(
+        title: Text("Awesome App"),
+      ),
+      body: Container(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            //this is normal header
+            // DrawerHeader(
+            //   child: Text(
+            //     "Nav Header",
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            //   decoration: BoxDecoration(color: Colors.purple),
+            // ),
+            UserAccountsDrawerHeader(
+              accountName: Text("Krishna Gajula"),
+              accountEmail: Text("gajulakrishna007@gmail.com"),
+              currentAccountPicture:CircleAvatar(
+                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1586083702768-190ae093d34d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OHx8bWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"),
+              )
+                  // Image.network("https://images.unsplash.com/photo-1586083702768-190ae093d34d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OHx8bWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",fit: BoxFit.cover ),
             ),
-          ),
-        ));
+            ListTile(
+              title: Text("Account"),
+              leading: Icon(Icons.person),
+              trailing: Icon(Icons.edit),
+              subtitle: Text("Personal"),
+            ),
+            ListTile(
+              title: Text("Email"),
+              leading: Icon(Icons.mail),
+              trailing: Icon(Icons.send),
+              subtitle: Text("gajulakrishna007@gmail.com"),
+            ),
+            ListTile(
+              title: Text("Send"),
+              leading: Icon(Icons.share),
+              trailing: Icon(Icons.send),
+              subtitle: Text("Personal"),
+            ),
+          ],
+        ),
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,  change floating button location
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.edit),
+        // mini:true,
+      ),
+    );
   }
 }
